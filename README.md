@@ -2,7 +2,7 @@
 
 Um sistema de gerenciamento de conteúdo (CMS) flexível para pequenos negócios, permitindo que donos de estabelecimentos (restaurantes, barbearias, etc.) gerenciem o conteúdo de seu próprio site sem precisar de conhecimentos técnicos.
 
-**[Acesse o Deploy na Vercel](URL_DA_VERCEL_AQUI)** | **[Acesse o Deploy na Netlify](URL_DA_NETLIFY_AQUI)**
+**[Acesse o Deploy na Vercel](https://cms-vitrine.vercel.app/)** | **[Acesse o Deploy na Netlify](https://cms-vitrine.netlify.app/)**
 
 ---
 
