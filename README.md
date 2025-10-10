@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CMS Vitrine Dinâmica
 
-## Getting Started
+Um sistema de gerenciamento de conteúdo (CMS) flexível para pequenos negócios, permitindo que donos de estabelecimentos (restaurantes, barbearias, etc.) gerenciem o conteúdo de seu próprio site sem precisar de conhecimentos técnicos.
 
-First, run the development server:
+**[Acesse o Deploy na Vercel](URL_DA_VERCEL_AQUI)** | **[Acesse o Deploy na Netlify](URL_DA_NETLIFY_AQUI)**
+
+---
+
+## 🚀 Sobre o Projeto
+
+Este projeto foi construído como parte do meu portfólio para demonstrar habilidades em desenvolvimento full-stack com tecnologias modernas. A aplicação consiste em:
+
+*   **Site Público (Vitrine):** Uma página estática, rápida e otimizada para SEO que exibe as informações do negócio.
+*   **Painel de Administração:** Uma área segura onde o dono do negócio pode fazer login e atualizar informações como serviços, preços, horários e contatos.
+
+## 🛠️ Tecnologias Utilizadas
+
+*   **Framework:** [Next.js](https://nextjs.org/ ) (App Router)
+*   **Linguagem:** [TypeScript](https://www.typescriptlang.org/ )
+*   **Estilização:** [Tailwind CSS](https://tailwindcss.com/ )
+*   **ORM:** [Prisma](https://www.prisma.io/ )
+*   **Banco de Dados:** PostgreSQL
+*   **Autenticação:** [NextAuth.js](https://next-auth.js.org/ ) (a ser implementado)
+*   **Deploy:** [Vercel](https://vercel.com/ ) & [Netlify](https://www.netlify.com/ )
+
+## ⚙️ Como Rodar o Projeto Localmente
 
 ```bash
+# 1. Clone o repositório
+git clone https://github.com/SEU-USUARIO/cms-vitrine.git
+
+# 2. Navegue até a pasta do projeto
+cd cms-vitrine
+
+# 3. Instale as dependências
+npm install
+
+# 4. Configure suas variáveis de ambiente em um arquivo .env.local
+# (copie o .env.example se houver um )
+DATABASE_URL="SUA_URL_DO_BANCO_DE_DADOS"
+
+# 5. Rode as migrações do Prisma (a ser implementado)
+# npx prisma migrate dev
+
+# 6. Inicie o servidor de desenvolvimento
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Abra [http://localhost:3000](http://localhost:3000 ) no seu navegador para ver o resultado.
