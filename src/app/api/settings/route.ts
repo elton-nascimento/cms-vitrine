@@ -1,27 +1,20 @@
 // src/app/api/settings/route.ts
+
 import { NextResponse } from 'next/server';
-import { db } from '@/lib/prisma';
+import prisma from '@/lib/prisma'; // <-- VOLTOU A SER 'prisma'
 import { getServerSession } from 'next-auth';
 
-// FUNÇÃO GET: Para buscar as configurações
 export async function GET() {
   const session = await getServerSession();
   if (!session) {
     return NextResponse.json({ error: 'Não autorizado' }, { status: 401 });
   }
 
-  // Busca a primeira (e única) entrada de configurações
-  const settings = await db.settings.findFirst();
+  const settings = await prisma.settings.findFirst(); // <-- VOLTOU A SER 'prisma'
 
-  // Se não houver configurações, retorna um objeto vazio
-  if (!settings) {
-    return NextResponse.json({});
-  }
-
-  return NextResponse.json(settings);
+  return NextResponse.json(settings || {});
 }
 
-// FUNÇÃO POST: Para criar ou atualizar as configurações
 export async function POST(request: Request) {
   const session = await getServerSession();
   if (!session) {
@@ -30,13 +23,11 @@ export async function POST(request: Request) {
 
   const data = await request.json();
 
-  // Busca a primeira entrada de configurações
-  const existingSettings = await prisma.settings.findFirst();
+  const existingSettings = await prisma.settings.findFirst(); // <-- VOLTOU A SER 'prisma'
 
-  let settings;
+  let savedSettings;
   if (existingSettings) {
-    // Se já existem, atualiza
-    settings = await prisma.settings.update({
+    savedSettings = await prisma.settings.update({ // <-- VOLTOU A SER 'prisma'
       where: { id: existingSettings.id },
       data: {
         businessName: data.businessName,
@@ -45,8 +36,7 @@ export async function POST(request: Request) {
       },
     });
   } else {
-    // Se não existem, cria
-    settings = await prisma.settings.create({
+    savedSettings = await prisma.settings.create({ // <-- VOLTOU A SER 'prisma'
       data: {
         businessName: data.businessName,
         phone: data.phone,
@@ -55,5 +45,5 @@ export async function POST(request: Request) {
     });
   }
 
-  return NextResponse.json(settings);
+  return NextResponse.json(savedSettings);
 }

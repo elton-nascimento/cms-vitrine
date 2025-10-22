@@ -1,10 +1,10 @@
 // src/app/(site)/page.tsx
-import { db } from '@/lib/prisma';
-import { Phone, MapPin } from 'lucide-react'; // Ícones para um visual melhor
 
-// Função para buscar os dados no servidor, específica para esta página
+import prisma from '@/lib/prisma'; // <-- VOLTOU A SER 'prisma'
+import { Phone, MapPin } from 'lucide-react';
+
 async function getSettings() {
-  const settings = await db.settings.findFirst();
+  const settings = await prisma.settings.findFirst(); // <-- VOLTOU A SER 'prisma'
   return settings;
 }
 
@@ -18,7 +18,6 @@ export default async function HomePage() {
           Bem-vindo a
         </h1>
         <h2 className="mt-4 text-6xl font-extrabold tracking-tight text-indigo-400 sm:text-7xl md:text-8xl">
-          {/* Exibe o nome do negócio vindo do banco de dados! */}
           {settings?.businessName || 'Nome do Seu Negócio Aqui'}
         </h2>
         <p className="mt-6 max-w-2xl mx-auto text-lg text-gray-300">
@@ -26,7 +25,6 @@ export default async function HomePage() {
         </p>
       </div>
 
-      {/* Seção de Contato */}
       {(settings?.phone || settings?.address) && (
         <div className="mt-10 bg-gray-900 rounded-lg p-8 max-w-md mx-auto">
           <h3 className="text-2xl font-bold mb-4">Entre em Contato</h3>

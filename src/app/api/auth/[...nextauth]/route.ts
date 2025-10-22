@@ -2,8 +2,7 @@
 
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-// 👇 MUDANÇA 1: Importar 'db' em vez de 'prisma'
-import { db } from "@/lib/prisma"; 
+import prisma from "@/lib/prisma"; // <-- VOLTOU A SER 'prisma'
 import { compare } from "bcryptjs";
 
 const handler = NextAuth({
@@ -20,8 +19,7 @@ const handler = NextAuth({
           return null;
         }
 
-        // 👇 MUDANÇA 2: Usar 'db' para a consulta
-        const user = await db.user.findUnique({
+        const user = await prisma.user.findUnique({ // <-- VOLTOU A SER 'prisma'
           where: { email: credentials.email },
         });
 
