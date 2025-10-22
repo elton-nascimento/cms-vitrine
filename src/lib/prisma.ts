@@ -1,6 +1,5 @@
 // src/lib/prisma.ts
 import { PrismaClient } from '@prisma/client';
-// 👇 MUDANÇA 1: Importando 'withAccelerate' em vez de 'PrismaAccelerate'
 import { withAccelerate } from '@prisma/extension-accelerate';
 
 declare global {
@@ -12,7 +11,6 @@ const makePrismaClient = () => {
   
   if (process.env.PRISMA_DATABASE_URL) {
     console.log("Prisma Accelerate is enabled.");
-    // 👇 MUDANÇA 2: Usando a função 'withAccelerate()'
     return client.$extends(withAccelerate());
   }
   
@@ -25,4 +23,6 @@ if (process.env.NODE_ENV !== 'production') {
   globalThis.prisma = prisma;
 }
 
-export default prisma;
+// 👇👇👇 AQUI ESTÁ A CORREÇÃO 👇👇👇
+// Exportamos o prisma, mas afirmamos seu tipo como PrismaClient para resolver a ambiguidade de tipos.
+export default prisma as PrismaClient;
