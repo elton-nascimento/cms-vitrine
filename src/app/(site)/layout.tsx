@@ -18,7 +18,7 @@ export default async function SiteLayout({
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-800 text-white">
-      <Header businessName={settings?.businessName} />
+      <Header businessName={settings?.businessName || ''} />
       <main className="flex-grow container mx-auto px-4 py-8">
         {children}
       </main>
