@@ -1,11 +1,11 @@
 // src/app/(site)/layout.tsx
 import { Header } from '@/components/site/Header';
 import { Footer } from '@/components/site/Footer';
-import prisma from '@/lib/prisma';
+import { db } from '@/lib/prisma';
 
 // Esta função busca os dados no servidor antes de renderizar o layout
 async function getSettings() {
-  const settings = await prisma.settings.findFirst();
+  const settings = await db.settings.findFirst();
   return settings;
 }
 

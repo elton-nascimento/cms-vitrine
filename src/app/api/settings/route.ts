@@ -1,6 +1,6 @@
 // src/app/api/settings/route.ts
 import { NextResponse } from 'next/server';
-import prisma from '@/lib/prisma';
+import { db } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 
 // FUNÇÃO GET: Para buscar as configurações
@@ -11,7 +11,7 @@ export async function GET() {
   }
 
   // Busca a primeira (e única) entrada de configurações
-  const settings = await prisma.settings.findFirst();
+  const settings = await db.settings.findFirst();
 
   // Se não houver configurações, retorna um objeto vazio
   if (!settings) {

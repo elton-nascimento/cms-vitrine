@@ -1,10 +1,10 @@
 // src/app/(site)/page.tsx
-import prisma from '@/lib/prisma';
+import { db } from '@/lib/prisma';
 import { Phone, MapPin } from 'lucide-react'; // Ícones para um visual melhor
 
 // Função para buscar os dados no servidor, específica para esta página
 async function getSettings() {
-  const settings = await prisma.settings.findFirst();
+  const settings = await db.settings.findFirst();
   return settings;
 }
 

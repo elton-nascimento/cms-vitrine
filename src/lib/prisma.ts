@@ -2,27 +2,26 @@
 import { PrismaClient } from '@prisma/client';
 import { withAccelerate } from '@prisma/extension-accelerate';
 
-declare global {
-  var prisma: PrismaClient | undefined;
-}
-
-const makePrismaClient = () => {
-  const client = new PrismaClient();
-  
-  if (process.env.PRISMA_DATABASE_URL) {
-    console.log("Prisma Accelerate is enabled.");
-    return client.$extends(withAccelerate());
-  }
-  
-  return client;
+// Cliente Prisma padrão para desenvolvimento local e migrações
+const prismaClientSingleton = () => {
+  return new PrismaClient();
 };
 
-const prisma = globalThis.prisma ?? makePrismaClient();
-
-if (process.env.NODE_ENV !== 'production') {
-  globalThis.prisma = prisma;
+declare global {
+  var prisma: undefined | ReturnType<typeof prismaClientSingleton>;
 }
 
-// 👇👇👇 AQUI ESTÁ A CORREÇÃO 👇👇👇
-// Exportamos o prisma, mas afirmamos seu tipo como PrismaClient para resolver a ambiguidade de tipos.
-export default prisma as PrismaClient;
+const prisma = globalThis.prisma ?? prismaClientSingleton();
+
+export default prisma;
+
+if (process.env.NODE_ENV !== 'production') globalThis.prisma = prisma;
+
+
+// Cliente Prisma estendido com Accelerate para produção/serverless
+const prismaWithAccelerate = new PrismaClient().$extends(withAccelerate());
+
+// Exporta o cliente correto dependendo do ambiente
+// Em produção (na Vercel), usa o cliente com Accelerate.
+// Em desenvolvimento, usa o cliente padrão.
+export const db = process.env.NODE_ENV === 'production' ? prismaWithAccelerate : prisma;
