@@ -1,6 +1,8 @@
 // src/app/(admin)/layout.tsx
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+import Link from "next/link"; // Importe o Link
+import React from "react"; // Boa prática garantir que o React está no escopo
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const session = await getServerSession();
@@ -10,11 +12,18 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   }
 
   return (
-    <div className="bg-gray-800 text-white min-h-screen p-4">
-      <header className="bg-gray-900 p-4 rounded shadow-md mb-4">
-        <h1 className="text-xl font-semibold">CMS Vitrine - Admin</h1>
+    <div className="bg-gray-800 text-white min-h-screen">
+      <header className="bg-gray-900 p-4 shadow-md">
+        <div className="container mx-auto flex justify-between items-center">
+          <h1 className="text-xl font-semibold">CMS Vitrine - Admin</h1>
+          {/* 👇👇👇 NOVO MENU DE NAVEGAÇÃO 👇👇👇 */}
+          <nav className="space-x-4">
+            <Link href="/dashboard" className="text-gray-300 hover:text-white">Início</Link>
+            <Link href="/dashboard/services" className="text-gray-300 hover:text-white">Serviços</Link>
+          </nav>
+        </div>
       </header>
-      <main className="bg-gray-900 p-4 rounded shadow-md">
+      <main className="container mx-auto p-4">
         {children}
       </main>
     </div>
